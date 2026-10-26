@@ -1,39 +1,39 @@
-xp = 0
-level = 1
-energy = 15
-level_up = 200
-def upar(xp,level):
-    if xp >= level_up:
-        xp-= level_up
-        level += 1
-        print(f"Level Up! Agora você é nível {level}")
-    return xp,level
+class Xp:
+    def __init__(self, xp: int, energy: int):
+        self.xp = xp
+        self.energy = energy
 
-while True:
-    print("1- Work +50xp")
-    print("2- Sleep +75xp")
-    print("3- Status")
-    print("4- Treinne +15xp")
-    print("5- Exit")
-    option = int(input("Insert a number:"))
-    if option == 1:
-        xp += 50
-        energy -= 10
-        xp,level = upar(xp,level)
-        print(f"Work with sucess :),Your xp and level is: {xp}, {level}")
-    elif option == 2:
-        energy += 75
-        print(f"Sleep Ok! Your energy {energy}")
-    elif option == 3:
-        print("----::STATUS::----")
-        print(f"Your xp: {xp}!")
-        print(f"Your energy: {energy}")
-    elif option == 4:
-        upar(xp)
-        xp += 15
-        print(f"Treinne with sucess!! Your xp: {xp}")
-    elif option == 5:
-        print("Exit for sistem! :)")
-        break
-    else:
-        print("Option invalid!")
+    def gain_energy(self):
+        self.energy += 100
+        return f"energy: {self.energy}"
+
+    def gain_xp(self):
+        if self.energy <= 0:
+            return f"needs to gain energy. energy: {self.energy}"
+        self.xp += 50
+        self.energy -= 50
+        return f"you gained XP. {self.xp}"
+
+    def gain_xp2(self):
+        if self.energy <= 0:
+            return f"needs to gain energy. energy: {self.energy}"
+        self.xp += 100
+        self.energy -= 100
+        return f"you gained XP. {self.xp}"
+
+    def gain_xp3(self):
+        if self.energy <= 0:
+            return f"needs to gain energy. energy: {self.energy}"
+        self.xp += 150
+        self.energy -= 150
+        return f"you gained XP. {self.xp}"
+
+xp = Xp(0,0)
+for _ in range(1,6):
+    xp.gain_energy()
+print(xp.energy)
+for _ in range(3):
+    xp.gain_xp3()
+print(xp.energy)
+print(xp.gain_xp(), xp.energy)
+print(xp.gain_xp3())
